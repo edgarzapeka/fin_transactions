@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 
 import Category from './Category';
 
@@ -42,9 +43,11 @@ class Filters extends React.Component {
                     <Typography>
                         Order by:
                     </Typography>
-                    <Typography onClick={selectDateOrder}>
+                    <Button color="primary" className={classes.button} onClick={selectDateOrder}>
                         { dateOrderBy }
-                    </Typography>
+                    </Button>
+                        
+
                 </Grid>
                 <Grid item xs={3}>
                     <Typography>
@@ -62,7 +65,10 @@ class Filters extends React.Component {
 const styles = theme => ({
     filtersContainer:{
         padding: '1em'   
-    }
+    },
+    button: {
+        margin: theme.spacing.unit,
+      },
 });
 
 export default withStyles(styles)(Filters);
