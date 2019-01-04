@@ -12,9 +12,6 @@ const Header = props => {
         <AppBar position="static">
             <Toolbar>
                 <Button color="default" className={classes.button}>
-                    Accounts
-                </Button>
-                <Button color="default" className={classes.button}>
                     Transactions
                 </Button>
             </Toolbar>
