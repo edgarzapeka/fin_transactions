@@ -6,19 +6,15 @@ import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import Avatar from '@material-ui/core/Avatar';
-import DoneIcon from '@material-ui/icons/Done';
 import Category from './Category';
 
 class Filters extends React.Component {
 
     render() {
         const { classes, accounts, selectAccount, selectedAccount, categories, selectCategory, selectedCategories, dateOrderBy, selectDateOrder } = this.props;
-        console.log(selectedAccount)
-        console.log(selectedCategories)
 
         return (
-            <Grid container >
+            <Grid container className={classes.filtersContainer}>
                 <Grid item xs={3}>
                     <Typography>
                         Select Account
@@ -64,7 +60,9 @@ class Filters extends React.Component {
 }
 
 const styles = theme => ({
-    
+    filtersContainer:{
+        padding: '1em'   
+    }
 });
 
 export default withStyles(styles)(Filters);

@@ -88,7 +88,6 @@ class App extends Component {
     
     const filteredByAccount = filters.selectedAccount === "" ? transactions : transactions.filter(t => t.accountId === filters.selectedAccount);
     
-    console.log(filters.selectedCategories.length + " length")
     let filteredByCategory = filters.selectedCategories.length === 0 ? 
       filteredByAccount : 
       filteredByAccount.filter(t => filters.selectedCategories.includes(t.category))
