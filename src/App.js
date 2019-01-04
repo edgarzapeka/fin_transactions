@@ -1,28 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import * as API from './api';
+import Account from './components/Account';
+import Header from './components/Header';
+
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      accounts: []
+    }
+  }
+
+  componentDidMount() {
+    API.getAllAccounts().then(response => response.json())
+    .then(data => {
+      this.setState({ accounts: data.accounts });
+    })
+  }
+
   render() {
+    const { accounts } = this.state;
+    const { classes } = this.props;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Grid container spacing={16} className={classes.root}>
+      <Header />
+        {accounts.map(a => (<Account  account={a} key={a.accountId}/>))}
+      </Grid>
     );
   }
 }
 
-export default App;
+const styles = theme => ({
+  root: {
+    
+  },
+});
+
+export default withStyles(styles)(App);
