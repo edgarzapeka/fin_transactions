@@ -84,22 +84,19 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     const { accounts, filters, transactions, categories } = this.state;
-
+  
+    const filteredByAccount = filters.selectedAccount === "" ? 
+      transactions :
+      transactions.filter(t => t.accountId === filters.selectedAccount);
     
-    const filteredByAccount = filters.selectedAccount === "" ? transactions : transactions.filter(t => t.accountId === filters.selectedAccount);
-    
-    let filteredByCategory = filters.selectedCategories.length === 0 ? 
+    const filteredByCategory = filters.selectedCategories.length === 0 ? 
       filteredByAccount : 
-      filteredByAccount.filter(t => filters.selectedCategories.includes(t.category))
-
-    if (filters.dateOrderBy === 'recent') {
-      filteredByCategory.sort((a, b) => new Date(b) > new Date(a) ? 1 : -1)
-    }else {
-      filteredByCategory.sort((a, b) => new Date(a) > new Date(b) ? 1 : -1)
-    }
+      filteredByAccount.filter(t => filters.selectedCategories.includes(t.category));
+ 
+    const filteredByDate = filters.dateOrderBy === 'recent' ? 
+      filteredByCategory.sort((a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)) :
+      filteredByCategory.sort((a, b) => new Date(a.transactionDate) - new Date(b.transactionDate));
     
-      
-
     return (
       <Grid container  className={classes.root}>
       <ErrorBoundary>
@@ -114,7 +111,7 @@ class App extends Component {
             dateOrderBy={filters.dateOrderBy}
             selectDateOrder={this.selectDateOrder}
           />
-          <TransactionList transactions={filteredByCategory}/>
+          <TransactionList transactions={filteredByDate}/>
         </ErrorBoundary>
       </Grid>
     );
