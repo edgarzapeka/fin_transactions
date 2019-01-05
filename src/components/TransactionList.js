@@ -15,7 +15,7 @@ const TransactionList = props => {
                     props.transactions.map(t => <Transaction key={t.transactionId} transaction={t} />)
                 ) : (
                     <Grid item md={12}>
-                        <Paper className={classes.noTransactions}>
+                        <Paper >
                             <Typography>
                                 You don't have any transacitons
                             </Typography>

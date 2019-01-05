@@ -75,7 +75,9 @@ class App extends Component {
     API.getAllAccounts()
       .then(response => response.json())
       .then(data => this.setState({ accounts: data.accounts }))
-    
+    API.getAllTransactions()
+      .then(response => response.json())
+      .then(data => { this.setState({ transactions: data.transactions })});
     API.getAllCategories()
       .then(response => response.json())
       .then(data => this.setState({ categories: data.categories }))
