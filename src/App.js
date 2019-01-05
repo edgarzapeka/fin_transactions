@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import './App.css';
 import * as API from './api';
 import Filters from './components/Filters';
 import Header from './components/Header';
-import TransactionList from './components/TransactionList';
 import ErrorBoundary from './ErrorBoundary';
 
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import { CircularProgress } from '@material-ui/core';
+
+const TransactionList = lazy(() => import('./components/TransactionList'));
 
 class App extends Component {
   constructor(props) {
@@ -73,9 +75,7 @@ class App extends Component {
     API.getAllAccounts()
       .then(response => response.json())
       .then(data => this.setState({ accounts: data.accounts }))
-    API.getAllTransactions()
-      .then(response => response.json())
-      .then(data => { this.setState({ transactions: data.transactions })});
+    
     API.getAllCategories()
       .then(response => response.json())
       .then(data => this.setState({ categories: data.categories }))
@@ -111,7 +111,9 @@ class App extends Component {
             dateOrderBy={filters.dateOrderBy}
             selectDateOrder={this.selectDateOrder}
           />
-          <TransactionList transactions={filteredByDate}/>
+          <Suspense fallback={<CircularProgress className={classes.progress} />}>
+            <TransactionList transactions={filteredByDate}/>
+          </Suspense>
         </ErrorBoundary>
       </Grid>
     );
@@ -120,7 +122,11 @@ class App extends Component {
 
 const styles = theme => ({
   root: {
-    
+  },
+  progress: {
+    position: 'fixed',
+    top: '50vh',
+    left: '50vw'
   },
 });
 
