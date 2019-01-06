@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
 import CategoryList from './CategoryList';
+import OrderByDate from './OrderByDate';
 
 class Filters extends React.Component {
 
@@ -33,16 +34,7 @@ class Filters extends React.Component {
                         { accounts.map(a => <MenuItem value={a.accountId} key={a.accountId}> {a.accountName} </MenuItem>) }
                     </Select>
                 </Grid>
-                <Grid item xs={4}>
-                    <Typography>
-                        Order by:
-                    </Typography>
-                    <Button color="primary" className={classes.button} onClick={selectDateOrder}>
-                        { dateOrderBy }
-                    </Button>
-                        
-
-                </Grid>
+                <OrderByDate dateOrderBy={dateOrderBy} selectDateOrder={selectDateOrder} />
                 <Grid item xs={4}>
                     <Typography>
                         Total Balance
