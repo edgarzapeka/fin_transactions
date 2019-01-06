@@ -15,7 +15,7 @@ const OrderByDate = props => {
     return (
         <Grid item xs={4} className={classes.wrapper}>
             <Typography className={classes.title}>
-                Order by:
+                Order by
             </Typography>
             <Fab
                 variant="extended"
