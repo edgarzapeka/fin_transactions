@@ -1,30 +1,44 @@
 import React from 'react';
 
-import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
 import CategoryList from './CategoryList';
 import OrderByDate from './OrderByDate';
 import SelectAccount from './SelectAccount';
 import TotalBalance from './TotalBalance';
+import FilterContainer from './FilterContainer';
 
 class Filters extends React.Component {
 
     render() {
-        const { classes, accounts, selectAccount, selectedAccount, categories, selectCategory, selectedCategories, dateOrderBy, selectDateOrder } = this.props;
+        const { 
+            accounts, 
+            selectAccount, 
+            selectedAccount, 
+            categories, 
+            selectCategory, 
+            selectedCategories, 
+            dateOrderBy, 
+            selectDateOrder 
+        } = this.props;
 
         return (
             <Grid container>
-                <SelectAccount accounts={accounts} selectAccount={selectAccount} selectedAccount={selectedAccount} />
-                <OrderByDate dateOrderBy={dateOrderBy} selectDateOrder={selectDateOrder} />
-                <TotalBalance accounts={accounts} />
-                <CategoryList  categories={categories} selectedCategories={selectedCategories} selectCategory={selectCategory}/>
+                <FilterContainer containerSize={4} title={'Select Account'} render={() => (
+                    <SelectAccount accounts={accounts} selectAccount={selectAccount} selectedAccount={selectedAccount} />
+                )} />
+                <FilterContainer containerSize={4} title={'Order By'} render={() => (
+                    <OrderByDate dateOrderBy={dateOrderBy} selectDateOrder={selectDateOrder} />
+                )} />
+                <FilterContainer containerSize={4} title={'Total Balance'} render={() => (
+                    <TotalBalance accounts={accounts} />    
+                )} />
+                <FilterContainer containerSize={12} title={'Select Categories'} render={() => (
+                    <CategoryList  categories={categories} selectedCategories={selectedCategories} selectCategory={selectCategory}/>
+                )} />
             </Grid>
         )
     }
 }
 
-const styles = theme => ({
-});
-
-export default withStyles(styles)(Filters);
+export default Filters;
