@@ -52,7 +52,7 @@ class App extends Component {
     this.setState(( prevState, props) => ({
       filters: {
         selectedAccount: prevState.filters.selectedAccount,
-        selectedCategories: updatedCategories,
+        selectedCategories: category ? updatedCategories : [],
         dateOrderBy: prevState.filters.dateOrderBy
       }
     }))

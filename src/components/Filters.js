@@ -7,7 +7,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
-import Category from './Category';
+import CategoryList from './CategoryList';
 
 class Filters extends React.Component {
 
@@ -16,7 +16,7 @@ class Filters extends React.Component {
 
         return (
             <Grid container className={classes.filtersContainer}>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <Typography>
                         Select Account
                     </Typography>
@@ -33,13 +33,7 @@ class Filters extends React.Component {
                         { accounts.map(a => <MenuItem value={a.accountId} key={a.accountId}> {a.accountName} </MenuItem>) }
                     </Select>
                 </Grid>
-                <Grid item xs={3}>
-                    <Typography>
-                        Select Category
-                    </Typography>
-                    { categories.map(c =>  <Category key={c} category={c} selectedCategories={selectedCategories} selectCategory={selectCategory} />)}
-                </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <Typography>
                         Order by:
                     </Typography>
@@ -49,7 +43,7 @@ class Filters extends React.Component {
                         
 
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <Typography>
                         Total Balance
                     </Typography>
@@ -57,6 +51,7 @@ class Filters extends React.Component {
                         {accounts.reduce((sum, account) => (sum + account.balance), 0)}
                     </Typography>
                 </Grid>
+                <CategoryList  categories={categories} selectedCategories={selectedCategories} selectCategory={selectCategory}/>
             </Grid>
         )
     }

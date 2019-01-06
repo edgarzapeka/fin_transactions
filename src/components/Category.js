@@ -12,15 +12,17 @@ const Category = props => {
             label={category}
             clickable
             onClick={() => selectCategory(category)}
-            className={classes.chip}
             color={selectedCategories.includes(category) ? 'secondary' : 'primary'}
             variant="outlined"
+            className={classes.category}
         />
     )
 }
 
 const styles = theme => ({
-    
+    category: {
+        margin: '0.2em'
+    }
 });
 
 export default withStyles(styles)(Category);
