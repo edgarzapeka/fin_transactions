@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 
 import CategoryList from './CategoryList';
 import OrderByDate from './OrderByDate';
+import SelectAccount from './SelectAccount';
 
 class Filters extends React.Component {
 
@@ -16,24 +17,8 @@ class Filters extends React.Component {
         const { classes, accounts, selectAccount, selectedAccount, categories, selectCategory, selectedCategories, dateOrderBy, selectDateOrder } = this.props;
 
         return (
-            <Grid container className={classes.filtersContainer}>
-                <Grid item xs={4}>
-                    <Typography>
-                        Select Account
-                    </Typography>
-                    <Select
-                        value={selectedAccount}
-                        onChange={selectAccount}
-                        displayEmpty
-                        name="age"
-                        className={classes.selectEmpty}
-                    >
-                        <MenuItem value={""}>
-                        <em>All</em>
-                        </MenuItem>
-                        { accounts.map(a => <MenuItem value={a.accountId} key={a.accountId}> {a.accountName} </MenuItem>) }
-                    </Select>
-                </Grid>
+            <Grid container>
+                <SelectAccount accounts={accounts} selectAccount={selectAccount} selectedAccount={selectedAccount} />
                 <OrderByDate dateOrderBy={dateOrderBy} selectDateOrder={selectDateOrder} />
                 <Grid item xs={4}>
                     <Typography>
@@ -50,12 +35,6 @@ class Filters extends React.Component {
 }
 
 const styles = theme => ({
-    filtersContainer:{
-        padding: '1em'   
-    },
-    button: {
-        margin: theme.spacing.unit,
-      },
 });
 
 export default withStyles(styles)(Filters);
