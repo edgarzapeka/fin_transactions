@@ -1,36 +1,46 @@
 import React from 'react';
 
 import { withStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Transaction from './Transaction';
-import { Typography } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
 
 const TransactionList = props => {
-        const { classes } = props;
+        const { classes, transactions } = props;
 
         return (
-            <Grid item md={12} className={classes.transactionsContainer}>
-                {props.transactions.length !== 0 ? (
-                    props.transactions.map(t => <Transaction key={t.transactionId} transaction={t} />)
-                ) : (
-                    <Grid item md={12}>
-                        <Paper >
-                            <Typography>
-                                You don't have any transacitons
-                            </Typography>
-                        </Paper>
-                    </Grid>
-                )}
-            </Grid>
+            <Table className={classes.table}>
+                <TableHead>
+                <TableRow>
+                    <TableCell>Description</TableCell>
+                    <TableCell align="right">Amount</TableCell>
+                    <TableCell align="right">Running Balance</TableCell>
+                    <TableCell align="right">Category</TableCell>
+                    <TableCell align="right">Date</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                    {transactions.map(t => {
+                        return (
+                        <TableRow key={t.transactionId}>
+                            <TableCell component="th" scope="row">
+                            {t.description}
+                            </TableCell>
+                            <TableCell align="right">{t.amount}</TableCell>
+                            <TableCell align="right">{t.runningBalance}</TableCell>
+                            <TableCell align="right">{t.category}</TableCell>
+                            <TableCell align="right">{t.transactionDate}</TableCell>
+                        </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
         )
 };
 
 const styles = theme => ({
-    noTransactions: {
-        textAlign: 'center',
-        padding: '2em'
-    }
 });
 
 export default withStyles(styles)(TransactionList);
